@@ -49,7 +49,8 @@
           "offset" : [-0.125, -1],
           "centered" : false,
           "zLevel" : 2,
-          "scalingGroup" : "liquid"
+          "rotationGroup" : "liquidr",
+		  "scaleGroup" : "liquid"
         },
         "partStates" : {
           "liquid" : {
@@ -87,10 +88,18 @@
         }
       }
     }
-  },
-  "scalingGroups" : {
-    "liquid" : {
-      "pivot" : [0, 0]
-    }
-  }
-}
+   },
+   
+   "rotationGroups" : {
+     "liquidr" : {
+       "rotationCenter" : [0.0,0.0],
+       "angularVelocity" : 1.5
+     }
+   },
+
+   "scaleGroups" : {
+     "liquid": {
+       "scaleCenter" :  [0.0,0.0]
+	 }
+   }
+ }

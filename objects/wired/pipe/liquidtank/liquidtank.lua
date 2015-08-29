@@ -1,28 +1,27 @@
-function init(args)  
-  entity.setInteractive(true)
-  if args == false then
-    pipes.init({liquidPipe})
-    local initInv = entity.configParameter("initialInventory")
-    if initInv and storage.liquid == nil then
-      storage.liquid = initInv
-    end
-    
-    entity.scaleGroup("liquid", {1, 0})
-    self.liquidMap = {}
-    self.liquidMap[1] = "water"
-    self.liquidMap[3] = "lava"
-    self.liquidMap[4] = "poison"
-    self.liquidMap[6] = "tentacle juice"
-    self.liquidMap[7] = "tar"
-    
-    self.capacity = entity.configParameter("liquidCapacity")
-    self.pushAmount = entity.configParameter("liquidPushAmount")
-    self.pushRate = entity.configParameter("liquidPushRate")
-    
-    if storage.liquid == nil then storage.liquid = {} end
-    
-    self.pushTimer = 0
-  end
+function init()  
+	entity.setInteractive(true)
+	
+	pipes.init({liquidPipe})
+	local initInv = entity.configParameter("initialInventory")
+	if initInv and storage.liquid == nil then
+	  storage.liquid = initInv
+	end
+
+	entity.scaleGroup("liquid", {1, 0})
+	self.liquidMap = {}
+	self.liquidMap[1] = "water"
+	self.liquidMap[3] = "lava"
+	self.liquidMap[4] = "poison"
+	self.liquidMap[6] = "tentacle juice"
+	self.liquidMap[7] = "tar"
+
+	self.capacity = entity.configParameter("liquidCapacity")
+	self.pushAmount = entity.configParameter("liquidPushAmount")
+	self.pushRate = entity.configParameter("liquidPushRate")
+
+	if storage.liquid == nil then storage.liquid = {} end
+
+	self.pushTimer = 0
 end
 
 function die()
@@ -36,6 +35,11 @@ end
 
 
 function onInteraction(args)
+  
+  for i,v in pairs(self) do
+		world.logInfo(tostring(i).."|"..tostring(v))
+  end
+  
   local liquid = self.liquidMap[storage.liquid[1]]
   local count = storage.liquid[2]
   local capacity = self.capacity

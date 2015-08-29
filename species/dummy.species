@@ -3,6 +3,7 @@
 	"playerSpecies" : false,
 	"nameGen" : [ "/species/humannamegen.config:names", "/species/humannamegen.config:names" ],
 	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.wav", "/sfx/humanoid/humanhurt_female1.wav" ],
+	"gruntNoises" : [ [ "/sfx/humanoid/apexgrunt1.wav", "/sfx/humanoid/apexgrunt2.wav" ], [ "/sfx/humanoid/apexgrunt1.wav", "/sfx/humanoid/apexgrunt2.wav" ] ],
 	"charGenTextLabels" : [ "SKIN COLOR", "HAIR STYLE", "SHIRT", "PANTS", "UNDY COLOR", "HAIR COLOR", "SHIRT COLOR", "PANTS COLOR", "DUMMY", "PERSONALITY" ],
 
 	"defaultBlueprints" : {
