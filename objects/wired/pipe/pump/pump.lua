@@ -1,5 +1,4 @@
-function init(virtual)
-  if virtual == false then
+function init()
     entity.setInteractive(true)
     pipes.init({liquidPipe})
     energy.init()
@@ -18,7 +17,6 @@ function init(virtual)
     buildFilter()
     
     if storage.state == nil then storage.state = false end
-  end
 end
 
 function onInboundNodeChange(args)
@@ -40,8 +38,8 @@ function die()
   energy.die()
 end
 
-function main(args)
-  pipes.update(entity.dt())
+function update(dt)
+  pipes.update(dt)
   energy.update()
   
   if storage.state and energy.consumeEnergy(self.energyConsumption, true) then

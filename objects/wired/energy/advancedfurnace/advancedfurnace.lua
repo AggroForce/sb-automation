@@ -1,5 +1,4 @@
-function init(virtual)
-  if not virtual then
+function init()
     energy.init()
 
     entity.setAnimationState("smelting", "off")
@@ -10,15 +9,14 @@ function init(virtual)
     self.smelting = true
 
     entity.setInteractive(true)
-  end
 end
 
 function die()
   energy.die()
 end
 
-function main()
-  energy.update()
+function update(dt)
+  energy.update(dt)
 
   local oreItem = world.containerItemAt(entity.id(), 0)
   local smeltedItem, newOreItem = getOreOutput(oreItem)
@@ -29,7 +27,7 @@ function main()
       entity.setAnimationState("smelting", "smelt")
     end
 
-    self.smeltTimer = self.smeltTimer + entity.dt()
+    self.smeltTimer = self.smeltTimer + dt
 
     if self.smeltTimer > self.smeltRate then
 

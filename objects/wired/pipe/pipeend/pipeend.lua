@@ -1,16 +1,14 @@
-function init(virtual)
-  if not virtual then
+function init()
     self.convertLiquid = entity.configParameter("liquidConversions")
 
     pipes.init({liquidPipe})
     
     self.usedNode = 0
-  end
 end
 
 --------------------------------------------------------------------------------
-function main(args)
-  pipes.update(entity.dt())
+function update(dt)
+  pipes.update(dt)
   
   local position = entity.position()
   local checkDirs = {}

@@ -1,5 +1,4 @@
-function init(virtual)
-  if not virtual then
+function init()
     energy.init()
 
     self.particleCooldown = 0.2
@@ -9,7 +8,6 @@ function init(virtual)
 
     entity.setParticleEmitterActive("charging", false)
     updateAnimationState()
-  end
 end
 
 function die()
@@ -54,13 +52,13 @@ function updateAnimationState()
   entity.scaleGroup("chargebar", {1, chargeAmt})
 end
 
-function main()
+function update(dt)
   if self.particleTimer > 0 then
-    self.particleTimer = self.particleTimer - entity.dt()
+    self.particleTimer = self.particleTimer - dt
     if self.particleTimer <= 0 then
       entity.setParticleEmitterActive("charging", false)
     end
   end
 
-  energy.update()
+  energy.update(dt)
 end

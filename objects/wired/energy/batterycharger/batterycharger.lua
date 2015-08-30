@@ -1,5 +1,4 @@
-function init(virtual)
-  if not virtual then
+function init()
     energy.init()
     datawire.init()
 
@@ -32,7 +31,6 @@ function init(virtual)
     }
 
     updateAnimationState()
-  end
 end
 
 -- this hook is called by the first datawire.update()
@@ -173,8 +171,8 @@ function setWireStates()
   entity.setOutboundNodeLevel(1, self.totalStoredEnergy == 0)
 end
 
-function main()
-  self.batteryCheckTimer = self.batteryCheckTimer - entity.dt()
+function update(dt)
+  self.batteryCheckTimer = self.batteryCheckTimer - dt
   if self.batteryCheckTimer <= 0 then
     checkBatteries()
   end
@@ -186,5 +184,5 @@ function main()
   setWireStates()
 
   datawire.update()
-  energy.update()
+  energy.update(dt)
 end

@@ -1,15 +1,10 @@
-function init(virtual)
-  if not virtual then
+function init()
     energy.init()
 
     self.fuelValues = {
       coalore=2,
-      uraniumore=4,
-      uraniumrod=4,
-      plutoniumore=6,
-      plutoniumrod=6,
-      solariumore=8,
-      solariumrod=8
+      plutoniumore=5,
+      plutoniumrod=6
     }
 
     self.fuelMax = 50
@@ -38,7 +33,6 @@ function init(virtual)
     updateAnimationState()
 
     -- profilerApi.init()
-  end
 end
 
 function die()
@@ -140,17 +134,12 @@ function getFuelItems()
 end
 
 function ejectItem(item)
-  local itemDropId
-  if next(item.data) == nil then
-    itemDropId = world.spawnItem(item.name, self.dropPoint, item.count)
-  else
-    itemDropId = world.spawnItem(item.name, self.dropPoint, item.count, item.data.__content)
-  end
+  local itemDropId = world.spawnItem(item.name, self.dropPoint, item.count)
   self.ignoreDropIds[itemDropId] = true
 end
 
-function generate()
-  local tickFuel = self.fuelUseRate * entity.dt()
+function generate(dt)
+  local tickFuel = self.fuelUseRate * dt
   if storage.fuel >= tickFuel then
     storage.fuel = storage.fuel - tickFuel
     energy.addEnergy(tickFuel * energy.fuelEnergyConversion)
@@ -165,9 +154,10 @@ function generate()
   end
 end 
 
-function main()
+function update(dt)
+
   if storage.state then
-    generate()
+    generate(dt)
     updateAnimationState()
   end
 
@@ -175,5 +165,5 @@ function main()
     getFuelItems()
   end
 
-  energy.update()
+  energy.update(dt)
 end

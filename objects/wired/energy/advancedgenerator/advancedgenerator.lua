@@ -1,5 +1,4 @@
-function init(virtual)
-  if not virtual then
+function init()
     energy.init()
     datawire.init()
     pipes.init({itemPipe})
@@ -9,7 +8,6 @@ function init(virtual)
 
     self.turbineAngle = 0
     self.turbineSpeed = 0.2
-  end
 end
 
 function onNodeConnectionChange()
@@ -36,13 +34,13 @@ function rotateTurbine()
   entity.rotateGroup("turbine", self.turbineAngle)
 end
 
-function main()
+function update(dt)
   if storage.state then
     -- yes, it really is that easy. uses the energyGenerationRate config parameter
     energy.generateEnergy()
     rotateTurbine()
   end
-  energy.update()
+  energy.update(dt)
   datawire.update()
-  pipes.update(entity.dt())
+  pipes.update(dt)
 end
